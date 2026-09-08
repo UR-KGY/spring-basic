@@ -60,16 +60,16 @@ public class GameService {
 
     @Transactional
     public GameDetailResponse updateProgress(Long gameId, ProgressRequest request) {
-        Game game = findGame(gameId);
+        Game game = findGame(gameId); //id 를 기반으로 게임 데이터 가져옴
         game.updateProgress(
             request.getCurrentHp(),
             request.getCurrentFloor(),
             request.getPhase(),
             request.getStatus()
-        );
+        ); //요청을 기반으로 데이터 수정
         // 요청의 deck은 저장할 덱 전체이므로 기존 카드를 모두 지우고 요청 순서대로 다시 저장합니다.
-        runCardRepository.deleteAllByGame(game);
-        saveDeck(game, request.getDeck());
+        runCardRepository.deleteAllByGame(game); //해당 게임의 카드를 삭제
+        saveDeck(game, request.getDeck()); //아마 기존 덱의 정보는 request 저장되어있었을 것
         List<RunCard> cards = runCardRepository.findAllByGameOrderByIdAsc(game);
         List<CardResponse> deck = new ArrayList<>();
         for (RunCard card : cards) {
