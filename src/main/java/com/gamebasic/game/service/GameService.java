@@ -89,7 +89,7 @@ public class GameService {
     // TODO (Lv 7): 게임 목록 조회. 주석을 풀고 구현하세요.
     @Transactional(readOnly = true)
     public List<GameSummaryResponse> getGames() {
-        List<Game> games = gameRepository.findAll(Sort.by(Sort.Order.desc("id"))); //내림 차순으로 전부 가져옴
+        List<Game> games = gameRepository.findAllByOrderByIdDesc(); //내림 차순으로 전부 가져옴
 
         return games.stream()
                 .map(game -> new GameSummaryResponse(
