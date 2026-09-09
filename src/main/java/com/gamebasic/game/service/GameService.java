@@ -7,6 +7,7 @@ import com.gamebasic.game.entity.Game;
 import com.gamebasic.game.repository.GameRepository;
 import com.gamebasic.runcard.dto.CardResponse;
 import com.gamebasic.runcard.dto.RunCardRequest;
+import com.gamebasic.runcard.dto.projection.DeckCount;
 import com.gamebasic.runcard.entity.RunCard;
 import com.gamebasic.runcard.repository.RunCardRepository;
 import jakarta.validation.Valid;
@@ -19,6 +20,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -103,6 +106,10 @@ public class GameService {
     public List<GameSummaryResponse> getGames() {
         List<Game> games = gameRepository.findAllByOrderByIdDesc(); //내림 차순으로 전부 가져옴
 
+        List<DeckCount> deckCounts = runCardRepository.countByGames(games);
+        Map<Long,Long> deckCountMap = deckCounts.stream()
+                .collect(Collectors.toMap(DeckCount::getGameId,DeckCount::getDeckSize));
+
         return games.stream()
                 .map(game -> new GameSummaryResponse(
                         game.getId(),
@@ -111,6 +118,7 @@ public class GameService {
                         game.getCurrentHp(),
                         game.getPhase(),
                         game.getStatus(),
+                        deckCountMap.getOrDefault(game.getId(),0L),
                         game.getCreatedAt(),
                         game.getUpdatedAt()
                 )).toList();
