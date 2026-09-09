@@ -43,7 +43,9 @@ public class GameService {
                 game.getCurrentFloor(),
                 game.getPhase(),
                 game.getStatus(),
-                deck
+                deck,
+                game.getCreatedAt(),
+                game.getUpdatedAt()
         );
     }
 
@@ -90,7 +92,9 @@ public class GameService {
                 game.getCurrentFloor(),
                 game.getPhase(),
                 game.getStatus(),
-                deck
+                deck,
+                game.getCreatedAt(),
+                game.getUpdatedAt()
         );
     }
 
@@ -106,7 +110,9 @@ public class GameService {
                         game.getCurrentFloor(),
                         game.getCurrentHp(),
                         game.getPhase(),
-                        game.getStatus()
+                        game.getStatus(),
+                        game.getCreatedAt(),
+                        game.getUpdatedAt()
                 )).toList();
     }
 
@@ -132,7 +138,9 @@ public class GameService {
                 game.getCurrentFloor(),
                 game.getPhase(),
                 game.getStatus(),
-                responses
+                responses,
+                game.getCreatedAt(),
+                game.getUpdatedAt()
         );
     }
 

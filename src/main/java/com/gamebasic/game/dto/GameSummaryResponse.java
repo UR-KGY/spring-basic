@@ -15,6 +15,8 @@ public class GameSummaryResponse {
     private final int currentHp;
     private final GamePhase phase;
     private final GameStatus status;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
 
     public GameSummaryResponse(
             Long id,
@@ -22,12 +24,16 @@ public class GameSummaryResponse {
             int currentFloor,
             int currentHp,
             GamePhase phase,
-            GameStatus status) {
+            GameStatus status,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt) {
         this.id = id;
         this.playerName = playerName;
         this.currentFloor = currentFloor;
         this.currentHp = currentHp;
         this.phase = phase;
         this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 }
