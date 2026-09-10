@@ -11,7 +11,7 @@ public class RankingClient {
 
     private final RestClient restClient = RestClient.create();
 
-    public RankingSource fetch(){
+    public RankingSource fetch() {
         return restClient.get()
                 .uri(SOURCE_URL)
                 .retrieve()
