@@ -1,7 +1,10 @@
 package com.gamebasic.ranking.client;
 
+import com.gamebasic.ranking.dto.RankingSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
+@Component
 public class RankingClient {
     //api 요청을 보낼 url?
     private static final String SOURCE_URL = "https://f-api.github.io/game-spring-api-docs/basic/rankings.json";

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class RankingController {
-    private RankingService rankingService;
+    private final RankingService rankingService;
 
     @GetMapping("/rankings")
     public ResponseEntity<RankingResponse> getRanking(){
