@@ -48,7 +48,7 @@ public class RankingService {
     //run.status 가 CLEARED 이고 run.clearedFloor 가 10인 기록만 반환
     private List<Record> selectClearRecords(List<Record> records) {
         return records.stream()
-                .filter(record -> record.getRun().getStatus().equals("Cleared")
+                .filter(record -> record.getRun().getStatus().equals("CLEARED")
                         && record.getRun().getClearedFloor() == 10)
                 .toList();
     }
@@ -58,7 +58,7 @@ public class RankingService {
         List<Record> result = records.stream()
                 .filter(isValidRecord).toList();
 
-        int after = records.size();
+        int after = result.size();
 
         return new ExcludeRecordDto(
                 before-after,
