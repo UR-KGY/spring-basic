@@ -9,12 +9,16 @@ public class Record {
     private final Client client;
     private final Player player;
     private final Run run;
+    private final BossFight bossFight;
+    private final Deck deck;
 
-    public Record(int id, String submittedAt, Client client, Player player, Run run) {
+    public Record(int id, String submittedAt, Client client, Player player, Run run, BossFight bossFight, Deck deck) {
         this.id = id;
         this.submittedAt = submittedAt;
         this.client = client;
         this.player = player;
         this.run = run;
+        this.bossFight = bossFight;
+        this.deck = deck;
     }
 }

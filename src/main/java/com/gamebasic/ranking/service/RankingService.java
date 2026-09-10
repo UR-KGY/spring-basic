@@ -16,6 +16,8 @@ public class RankingService {
 
 //        RankingResponse response = new RankingResponse(
 //                rankingSource.getMeta().getSeason().getName(),
+//                rankingSource.getMeta().getTotalRecords(),
+//                rankingSource.get
 //        )
 
         return null;
