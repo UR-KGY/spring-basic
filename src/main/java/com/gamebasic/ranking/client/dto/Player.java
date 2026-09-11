@@ -1,7 +1,10 @@
 package com.gamebasic.ranking.client.dto;
 
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
 public class Player {
     private final String id;
     private final String name;
