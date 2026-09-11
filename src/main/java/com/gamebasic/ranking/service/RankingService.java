@@ -121,8 +121,8 @@ public class RankingService {
     //정렬 타입인 Comparator를 모아둠
     //우선 run.durationSeconds 으로 오름차순
     Comparator<Record> orderByDurationSecondsAsc= Comparator.comparingInt(record -> record.getRun().getDurationSeconds());
-    // run.finalHp 을 기준으로 내림차순
-    Comparator<Record> orderByFinalHpDesc = Comparator.comparingInt(record -> record.getRun().getFinalHp());
+    // run.finalHp 을 기준으로 내림차순 reversed 사용 시 Object 로 형변환이 되려 에러 발생 (Record record) 처럼 명시해줘야한다.
+    Comparator<Record> orderByFinalHpDesc = Comparator.comparingInt((Record record) -> record.getRun().getFinalHp()).reversed();
     // id를 기준으로 오름차순
     Comparator<Record> orderByIdAsc = Comparator.comparingInt(Record::getId);
 
