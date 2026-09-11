@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public class Card {
-    private final CardType cardType;
+    private final String cardType;
     private final int acquiredFloor;
 
-    public Card(CardType cardType, int acquiredFloor) {
+    public Card(String cardType, int acquiredFloor) {
         this.cardType = cardType;
         this.acquiredFloor = acquiredFloor;
     }

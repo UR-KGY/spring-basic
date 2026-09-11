@@ -106,14 +106,14 @@ public class RankingService {
     //deck.cards가 9장 이상 20장 이하이고, deck.size가 deck.cards의 실제 개수와 같음
     Predicate<Record> deckCardsOk = r -> r.getDeck().getCards().size() >= 9 && r.getDeck().getCards().size() <= 20 && r.getDeck().getSize() == r.getDeck().getCards().size();
     //카드가 enum 목록안에 존재하는 카드인지를 확인
-    Predicate<Record> cardTypeOk = r -> r.getDeck().getCards().stream().allMatch(card -> Arrays.stream(CardType.values()).anyMatch(cardType -> cardType == card.getCardType()));
+    Predicate<Record> cardTypeOk = r -> r.getDeck().getCards().stream().allMatch(card -> Arrays.stream(CardType.values()).anyMatch(cardType -> cardType.name().equals(card.getCardType())));
     //카드를 휙득한 층이 0이상 9이하인지
     Predicate<Record> acquiredFloorOk = r -> r.getDeck().getCards().stream().allMatch(card -> card.getAcquiredFloor() >=0 && card.getAcquiredFloor() <=9);
     //보스 페이즈가 순서대로 THRONE,UNBOUND,ECLIPSE 순서인지 와 각 turns 가 1이상이고  totalTurns 가 세 개의 turns 의 합과 같은지
     Predicate<Record> bossPhaseOk = r-> r.getBossFight().getPhases().stream().map(BossPhase::getPhase).toList().equals(List.of(Phase.THRONE,Phase.UNBOUND,Phase.ECLIPSE))
             && r.getBossFight().getPhases().stream().allMatch(p -> p.getTurns() >=1) && r.getBossFight().getTotalTurns() == r.getBossFight().getPhases().stream().mapToInt(BossPhase::getTurns).sum();
     //bossFight.finishingCard가 그 기록의 deck.cards에 있는 카드 타입
-    Predicate<Record> finishingCardOk = r-> r.getDeck().getCards().stream().anyMatch(card -> card.getCardType().toString().equals(r.getBossFight().getFinishingCard()));
+    Predicate<Record> finishingCardOk = r-> r.getDeck().getCards().stream().anyMatch(card -> Objects.equals(card.getCardType(), r.getBossFight().getFinishingCard()));
     //종합적인 제외 조건
     Predicate<Record> totalPredicate = clearTimeOk.and(hpOk).and(deckCardsOk).and(cardTypeOk).and(acquiredFloorOk).and(bossPhaseOk).and(finishingCardOk);
 

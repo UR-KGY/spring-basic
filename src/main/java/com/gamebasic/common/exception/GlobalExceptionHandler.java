@@ -59,6 +59,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({HttpMessageNotReadableException.class, MethodArgumentTypeMismatchException.class})
     public ResponseEntity<ErrorResponse> handleUnreadable(Exception e, HttpServletRequest request) {
+        e.printStackTrace();
         return respond(HttpStatus.BAD_REQUEST, "요청 본문이나 파라미터 형식이 올바르지 않습니다.", request);
     }
 
