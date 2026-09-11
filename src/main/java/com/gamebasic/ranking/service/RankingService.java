@@ -26,7 +26,6 @@ public class RankingService {
         RankingSource rankingSource = rankingClient.fetch();
 
         String name = rankingSource.getMeta().getSeason().getName();
-        int totalRecords = rankingSource.getMeta().getTotalRecords();
 
         //우선적으로 순위 대상만을 선별하여 필터링
         List<Record> clearRecords = selectClearRecords(rankingSource.getRecords());
@@ -35,6 +34,8 @@ public class RankingService {
         int excludeCount = dto.getExcludeCount();
         //필터링된 기록들을 정렬
         List<Record> finalRecords = filterByPlayerId(sortRecord(dto.getRecords()));
+
+        int totalRecords = finalRecords.size();
 
         //플레이어 순위(인덱스 순서) 를 구하기 위해 IntStream을 사용(for문의 i++ 증감식과 비슷)
 
