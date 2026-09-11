@@ -26,6 +26,7 @@ public class RankingService {
         RankingSource rankingSource = rankingClient.fetch();
 
         String name = rankingSource.getMeta().getSeason().getName();
+        int totalRecords = rankingSource.getMeta().getTotalRecords();
 
         //우선적으로 순위 대상만을 선별하여 필터링
         List<Record> clearRecords = selectClearRecords(rankingSource.getRecords());
@@ -35,7 +36,7 @@ public class RankingService {
         //필터링된 기록들을 정렬
         List<Record> finalRecords = filterByPlayerId(sortRecord(dto.getRecords()));
 
-        int totalRecords = finalRecords.size();
+//        int totalRecords = finalRecords.size();
 
         //플레이어 순위(인덱스 순서) 를 구하기 위해 IntStream을 사용(for문의 i++ 증감식과 비슷)
 
@@ -43,11 +44,11 @@ public class RankingService {
                 .mapToObj(i -> {
                     Record r = finalRecords.get(i);
                     return new Entry(i + 1,
-                            r.getPlayer().getName(),
-                            r.getRun().getDurationSeconds(),
-                            r.getRun().getFinalHp(),
-                            r.getBossFight().getTotalTurns(),
-                            r.getDeck().getSize());  // record 전체가 아니라 필요한 필드만 추출
+                            r.getPlayer().getName(), //플레이어 이름
+                            r.getRun().getDurationSeconds(), //클라이까지의 시간
+                            r.getRun().getFinalHp(), //마지막에 남은 HP
+                            r.getBossFight().getTotalTurns(), //최종 보스전에서 쓴 총 턴수
+                            r.getDeck().getSize());// 클리어 시점의 덱 카드 수
                 })
                 .toList();
 
